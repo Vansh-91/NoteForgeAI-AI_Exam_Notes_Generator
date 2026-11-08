@@ -7,9 +7,11 @@ import Auth from "./Pages/Auth";
 import Notes from "./Pages/Notes";
 import Pricing from "./Pages/Pricing";
 import History from "./Pages/History";
-
+import FinalResult from "./Components/FinalResult";
 import { useUser } from "./context/userContext";
 import getcurrentuser from "./Services/api";
+import PaymentFailed from "./Pages/PaymentFailed";
+import PaymentSuccess from "./Pages/PaymentSuccess";
 
 function App() {
   const { user, setUser, loading, setLoading } = useUser();
@@ -66,7 +68,19 @@ function App() {
         path="/Auth"
         element={user ? <Navigate to="/Home" replace /> : <Auth />}
       />
+      <Route
+        path="/payment-failed"
+        element={<PaymentFailed/>}
+      />
+      <Route
+        path="/payment-success"
+        element={<PaymentSuccess/>}
+      />
 
+                <Route
+                    path="/notes/:id"
+                    element={<FinalResult />}
+                />
       <Route
         path="/Home"
         element={user ? <Home /> : <Navigate to="/Auth" replace />}

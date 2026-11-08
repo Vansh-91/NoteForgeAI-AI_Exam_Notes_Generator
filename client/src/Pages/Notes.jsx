@@ -4,7 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { useUser } from "../context/userContext";
 import TopicForm from "../Components/TopicForm";
 import { useState } from "react";
-
+import Sidebar from "../Components/Sidebar";
+import FinalResult from "../Components/FinalResult";
 function Notes() {
   const navigate = useNavigate();
   const { user, loading: userLoading } = useUser();
@@ -112,20 +113,43 @@ function Notes() {
           </motion.div>
         )}
 
-        {!loading && result && (
-          <motion.section
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="mt-6 rounded-2xl border border-gray-200 bg-white p-6 shadow-lg"
-          >
-            <h2 className="mb-4 text-2xl font-bold">Your Generated Notes</h2>
-            <div className="whitespace-pre-wrap leading-7 text-gray-700">
-              {typeof result === "string"
-                ? result
-                : JSON.stringify(result, null, 2)}
-            </div>
-          </motion.section>
-        )}
+       
+{!loading && result && (
+  <motion.section
+    initial={{ opacity: 0, y: 15 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.4 }}
+    className="mt-8"
+  >
+    {/* Dashboard heading */}
+    <div className="mb-6">
+      <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">
+        Your Learning Dashboard
+      </h2>
+      <p className="mt-2 text-sm text-gray-500">
+        Your AI-generated exam notes, revision plan and important topics.
+      </p>
+    </div>
+
+    {/* Main dashboard layout */}
+    <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+
+      {/* Left Sidebar */}
+      <aside className="lg:col-span-4 xl:col-span-3 lg:sticky lg:top-6">
+        <Sidebar result={result} />
+      </aside>
+
+      {/* Right Content */}
+      <div className="min-w-0 lg:col-span-8 xl:col-span-9">
+        <div className="rounded-2xl border border-gray-200 bg-white shadow-sm overflow-hidden">
+          <FinalResult result={result} />
+        </div>
+      </div>
+
+    </div>
+  </motion.section>
+)}
+
       </main>
     </div>
   );

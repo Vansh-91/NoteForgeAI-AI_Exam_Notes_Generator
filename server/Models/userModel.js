@@ -22,7 +22,10 @@ unique:true,
     type:mongoose.Schema.Types.ObjectId,
     ref:"Notes",
     
-    }
+    },creditedSessions: {
+    type: [String],
+    default: []
+}
 },{timestamps:true})
 const User=mongoose.model("UserModel",userSchema);
 export default User
