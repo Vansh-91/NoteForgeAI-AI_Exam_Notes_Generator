@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 import MermaidSetup from "./MermaidSetup";
 import ChartSetup from "./ChartSetup";
 import axios from "axios";
-
+const API = import.meta.env.VITE_API_URL;
 function FinalResult({ result: initialResult }) {
 
     const { id } = useParams();
@@ -33,7 +33,7 @@ function FinalResult({ result: initialResult }) {
                 const token = localStorage.getItem("token");
 
                 const response = await axios.get(
-                    `http://localhost:5000/api/pdf/${id}`,
+                    `${API}/api/pdf/${id}`,
                     {
                         headers: {
                             Authorization: `Bearer ${token}`
@@ -87,7 +87,7 @@ function FinalResult({ result: initialResult }) {
             const token = localStorage.getItem("token");
 
             const response = await axios.post(
-                "http://localhost:5000/api/pdf/generate-pdf",
+                `${API}/api/pdf/generate-pdf`,
                 { result },
                 {
                     headers: {

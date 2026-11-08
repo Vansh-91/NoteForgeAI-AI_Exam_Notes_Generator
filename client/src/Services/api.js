@@ -1,6 +1,6 @@
 
 import axios from "axios";
-
+const API = import.meta.env.VITE_API_URL;
 const getcurrentuser = async () => {
   const token = localStorage.getItem("token");
 
@@ -11,7 +11,7 @@ const getcurrentuser = async () => {
 
   try {
     const response = await axios.get(
-      "http://localhost:5000/api/user/currentuser",
+      `${API}/api/user/currentuser`,
       {
         headers: {
           Authorization: `Bearer ${token}`,

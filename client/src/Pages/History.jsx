@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "motion/react";
-
+const API = import.meta.env.VITE_API_URL;
 function History() {
 
     const navigate = useNavigate();
@@ -30,7 +30,7 @@ function History() {
                 }
 
                 const response = await axios.get(
-                    "http://localhost:5000/api/pdf/getnotes",
+                    `${API}/api/pdf/getnotes`,
                     {
                         headers: {
                             Authorization: `Bearer ${token}`

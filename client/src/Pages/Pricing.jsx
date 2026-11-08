@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { motion } from "motion/react"
 import axios from 'axios'
-
+const API = import.meta.env.VITE_API_URL;
 function Pricing() {
   const [selectedPrice,setSelectedPrice]=useState(null)
   const [paying,setPaying]=useState(false)
@@ -13,7 +13,7 @@ function Pricing() {
 try{
 setPayingAmount(amount)
 setPaying(true)
-const result=await axios.post("http://localhost:5000/api/stripe/create-order",{amount},{
+const result=await axios.post(`${API}/api/stripe/create-order`,{amount},{
   headers: {
     Authorization: `Bearer ${localStorage.getItem("token")}`
   }

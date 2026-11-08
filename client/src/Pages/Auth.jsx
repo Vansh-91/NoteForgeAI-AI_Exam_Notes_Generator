@@ -6,6 +6,7 @@ import { auth,provider } from '../FireBase'
 import { useUser } from '../context/userContext'
 import axios from 'axios'
 import {useNavigate} from 'react-router-dom'
+const API = import.meta.env.VITE_API_URL;
 function Auth() {
     const {setUser}=useUser();
     const navigate=useNavigate();
@@ -15,7 +16,7 @@ function Auth() {
  const User=response.user
  const name=User.displayName
  const email=User.email
- const result=await axios.post("http://localhost:5000/api/auth/google",{
+ const result=await axios.post(`${API}/api/auth/google`,{
     name,email
  })
  const token=result.data.token

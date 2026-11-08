@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { motion } from "motion/react";
 import axios from "axios";
-
+const API = import.meta.env.VITE_API_URL;
 function TopicForm({setResult,setLoading,loading,setError}) {
   const [topic, setTopic] = useState("");
   const [classLevel, setClassLevel] = useState("");
@@ -21,7 +21,7 @@ function TopicForm({setResult,setLoading,loading,setError}) {
   setError("");
   setResult(null);
 try{
-    const response=await axios.post("http://localhost:5000/api/notes/generate",{topic,
+    const response=await axios.post(`${API}/api/notes/generate`,{topic,
       classLevel,
       examType,
       revisionMode,
